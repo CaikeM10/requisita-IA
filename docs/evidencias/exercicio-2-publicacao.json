@@ -1,0 +1,34 @@
+{
+  "commit": "78af9c35d61a25623e08aefc0afa5b8a206e97f2",
+  "pr": "https://github.com/CaikeM10/requisita-IA/pull/2",
+  "jiraCommentUrl": "https://motasaldanhadefreitasjoaopedro.atlassian.net/browse/KAN-4?focusedCommentId=10000",
+  "update": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"data\":{\"message\":\"Comment added to KAN-4 successfully\",\"commentId\":\"10000\",\"body\":\"Exercício 2 publicado para revisão: https://github.com/CaikeM10/requisita-IA/pull/2\\n\\nCommit: 78af9c35d61a25623e08aefc0afa5b8a206e97f2. Branch feat/user-phone, base feat/google-auth. Depende do PR #1, aberto e sem merge.\\n\\nSomente laboratório requisitaia-lab-dev, separado e sem integração ao NextAuth. Migration 20261017184706_add_user_phone: SQL revisado e aprovado pelo usuário, aplicado uma única vez via MCP apply_migration; arquivo local alinhado ao histórico remoto.\\n\\nValidação automática realmente executada via MCP: phone text opcional, sem default nem unicidade; dois registros originais intactos com phone NULL; constraints, RLS e permissões preservadas. Comparação dos snapshots aprovada. Teste reutilizável: supabase/tests/user_phone_final.sql. Hook normal (sem --no-verify) executou npm run check com tipos e build aprovados.\\n\\nLimitações: ensaio prévio de DDL com rollback não executado por indisponibilidade de psql/conexão local, depois dispensado. INSERT/UPDATE com rollback não executados por ausência de suporte transacional explícito no contrato da ferramenta. supabase/tests/user_phone.sql apenas preparado, não executado. Evidências reais no PR em docs/evidencias/ e docs/VALIDACAO-EXERCICIO-2.md.\\n\\nRevisão do PR pendente. Sem entrega em produção, sem merge e sem encerramento do ticket. Nenhuma mensagem ao Caike.\",\"appliedContentFormat\":\"markdown\",\"jsmCommentType\":\"publicComment\"}}"
+      }
+    ],
+    "isError": false
+  },
+  "readback": {
+    "issue": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"data\":{\"appliedContentFormat\":\"markdown\",\"id\":\"10013\",\"key\":\"KAN-4\",\"fields\":{\"summary\":\"[Laboratório DSAIA] Adicionar telefone opcional aos usuários\",\"description\":\"No laboratório Supabase requisitaia-lab-dev, adicionar a coluna phone à tabela lab.users. A alteração deve partir do schema real consultado via MCP e preservar os usuários fictícios existentes. Este laboratório não está integrado ao NextAuth.\\n\\nCritérios de aceite:\\n\\n* Coluna phone do tipo text, opcional, sem valor padrão e sem unicidade.\\n* Registros existentes permanecem intactos, com phone NULL.\\n* Telefone é armazenado como texto para preservar prefixos e zeros.\\n* RLS e permissões existentes são preservadas.\\n* Migration versionada no repositório.\\n* Validação automática verifica coluna, nulabilidade, preservação dos dados e permissões.\\n* PR vinculado ao ticket e aviso à equipe após a validação.\\n\\n\",\"status\":{\"name\":\"Tarefas pendentes\"}}}}"
+        }
+      ],
+      "isError": false
+    },
+    "comments": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"data\":{\"startAt\":0,\"maxResults\":100,\"total\":1,\"isLast\":true,\"appliedContentFormat\":\"markdown\",\"comments\":[{\"id\":\"10000\",\"author\":{\"displayName\":\"João pedro “JP” Mota\"},\"body\":\"Exercício 2 publicado para revisão: https://github.com/CaikeM10/requisita-IA/pull/2\\n\\nCommit: 78af9c35d61a25623e08aefc0afa5b8a206e97f2. Branch feat/user-phone, base feat/google-auth. Depende do PR #1, aberto e sem merge.\\n\\nSomente laboratório requisitaia-lab-dev, separado e sem integração ao NextAuth. Migration 20261017184706_add_user_phone: SQL revisado e aprovado pelo usuário, aplicado uma única vez via MCP apply_migration; arquivo local alinhado ao histórico remoto.\\n\\nValidação automática realmente executada via MCP: phone text opcional, sem default nem unicidade; dois registros originais intactos com phone NULL; constraints, RLS e permissões preservadas. Comparação dos snapshots aprovada. Teste reutilizável: supabase/tests/user_phone_final.sql. Hook normal (sem --no-verify) executou npm run check com tipos e build aprovados.\\n\\nLimitações: ensaio prévio de DDL com rollback não executado por indisponibilidade de psql/conexão local, depois dispensado. INSERT/UPDATE com rollback não executados por ausência de suporte transacional explícito no contrato da ferramenta. supabase/tests/user_phone.sql apenas preparado, não executado. Evidências reais no PR em docs/evidencias/ e docs/VALIDACAO-EXERCICIO-2.md.\\n\\nRevisão do PR pendente. Sem entrega em produção, sem merge e sem encerramento do ticket. Nenhuma mensagem ao Caike.\",\"created\":\"2026-10-17T15:50:34.486-0300\",\"updated\":\"2026-10-17T15:50:34.486-0300\",\"jsdPublic\":true}]}}"
+        }
+      ],
+      "isError": false
+    }
+  }
+}

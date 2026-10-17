@@ -105,5 +105,28 @@ Nenhuma dependência instalada. Build não substitui a validação SQL executada
 
 ## Escopo encerrado nesta etapa
 
-Aplicação e validação posterior concluídas. Sem commit, push, PR, atualização
-do Jira ou mensagens. NextAuth continua sem integração ao laboratório.
+Aplicação e validação posterior concluídas. NextAuth continua sem integração
+ao laboratório.
+
+## Publicação autorizada posteriormente
+
+Em 17/10/2026, o usuário autorizou commit, push, PR e atualização do Jira.
+Commit funcional: 78af9c35d61a25623e08aefc0afa5b8a206e97f2.
+Hook pre-commit normal executou npm run check com código 0, sem --no-verify.
+Stage revisado: somente documentação, evidências e SQL do exercício 2;
+sem credenciais detectadas, arquivos de ambiente, dependências ou build.
+Exercício 1 preservado. Migration inicial preservada, inclusive seu conteúdo.
+
+Push de feat/user-phone realizado sem force. PR aberto para feat/google-auth:
+https://github.com/CaikeM10/requisita-IA/pull/2
+Depende do PR #1, consultado e confirmado aberto, sem merge.
+O conector GitHub retornou 403 na criação; a API GitHub com autenticação
+Git existente criou o PR #2, sem expor credenciais.
+
+KAN-4 recebeu o comentário 10000 com PR, migration, resultados e limitações:
+https://motasaldanhadefreitasjoaopedro.atlassian.net/browse/KAN-4?focusedCommentId=10000
+Ticket e comentários relidos via MCP para confirmar a atualização.
+Respostas reais em docs/evidencias/exercicio-2-publicacao.json.
+Sem transição de status, aprovação de revisão, merge ou entrega em produção.
+Nenhuma mensagem ao Caike. Um commit documental posterior registra estas
+evidências de publicação, geradas após o commit funcional.
