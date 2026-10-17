@@ -1,0 +1,13 @@
+node_modules/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+
+# Segredos locais; somente o modelo deve ser versionado.
+.env*
+!.env.example
+*.pem
+*.key
+npm-debug.log*
