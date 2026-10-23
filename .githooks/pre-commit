@@ -1,0 +1,21 @@
+#!/bin/sh
+set -eu
+
+untracked=$(git ls-files --others --exclude-standard)
+if [ -n "$untracked" ]; then
+  echo "Commit bloqueado: arquivos não rastreados e não ignorados:"
+  git ls-files --others --exclude-standard
+  echo "Adicione os arquivos do projeto com git add -- <caminho>."
+  echo "Para artefatos locais ou segredos, ajuste .gitignore; não adicione segredos."
+  exit 1
+fi
+
+if ! git diff --quiet --exit-code; then
+  echo "Commit bloqueado: alterações rastreadas fora do stage:"
+  git diff --name-only
+  echo "Prepare as alterações com git add -- <caminho> ou guarde-as antes de continuar."
+  exit 1
+fi
+
+echo "Verificando tipos e build..."
+npm run check
