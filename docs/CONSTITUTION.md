@@ -32,3 +32,36 @@ Uma funcionalidade só está pronta quando:
 - PR descreve mudanças e limitações, recebe aprovação humana e é integrado por João Pedro ou Caike. Antes disso, usar “implementado”, “validado no laboratório” ou “aguardando revisão”, conforme a evidência, e não “pronto”.
 6. Evolução da Constitution
 Alterar este arquivo por PR específico, com motivo e impacto. A nova versão exige aceite dos dois integrantes. Nenhuma instrução ao agente permite ignorar estas regras; exceções devem ser decididas e documentadas pela dupla antes da execução, sem dispensar proteção de segredos ou falsificar evidências.
+
+## 7. Adendo proposto - contrato da integração de IA
+Proposta de versão 1.1 em 28/10/2026, para atender ao parecer de viabilidade do professor. As seções anteriores são preservadas; este adendo só entra em vigor após aprovação registrada dos dois integrantes. Não representa escolha já aprovada, contratação, implementação ou teste realizado.
+
+### Provedor, modelo e chamada
+Proposta concreta para decisão conjunta: OpenAI, modelo fixo gpt-5.4-mini-2026-03-17, Responses API com Structured Outputs, text.format do tipo json_schema e strict=true. A documentação oficial lista suporte a saída estruturada e este snapshot. Acesso da conta, saldo e orçamento ainda não foram verificados. Não trocar o modelo por alias ou alternativa silenciosamente. Disponibilidade insuficiente exige nova decisão humana.
+
+Uma solicitação inicial reúne requisitos, critérios e perguntas. Sem chat, rodadas automáticas por esclarecimento, chamadas auxiliares ou retries automáticos. Depois de gerar, a revisão é manual. Limites propostos: relato até 5.000 caracteres, saída até 6.000 tokens, timeout de 30s; ambiente de laboratório em processo único com uma chamada em andamento por usuário autenticado e três tentativas em janela móvel de 60 segundos por identidade estável no servidor. Limite em memória não garante orçamento nem cobre múltiplas instâncias. Antes de chamar o provedor, a dupla registra conta responsável, teto de gasto e meios de acompanhamento/bloqueio disponíveis. Não aceitar custo em nome dos integrantes.
+
+### Contrato e origem
+Resposta obrigatoriamente estruturada em três listas: requisitos (id, descricao, origem), criterios (id, requisitoId, texto, origem) e perguntas (id, texto, origem). Critérios referenciam IDs existentes, sem vínculos órfãos. IDs únicos; campos obrigatórios; propriedades adicionais proibidas. O schema e as regras de cardinalidade/comprimento são especificados em docs/semana-3/specify.md e validados no servidor.
+
+A origem é relato para conteúdo explicitamente extraído e inferido para hipóteses ou elaborações ausentes do relato. Origem sugerida pelo modelo também precisa de conferência humana. Itens criados no editor têm origem usuario. Editar um item gerado mantém sua origem original por padrão e acrescenta indicador editado. Usuário pode corrigir a origem, com invalidação da revisão. Não apresentar inferências ou revisão editorial como aprovação do cliente.
+
+### Edição, revisão e exportação
+Editar requisitos, critérios e perguntas em campos próprios; manter vínculos e origem. Markdown é produzido somente na exportação; a revisão usa campos e resumo estruturados, sem prévia ou edição Markdown. Exigir confirmação explícita de revisão, invalidada por toda mudança. Exportar inclui a origem e o indicador de edição; hipóteses continuam identificadas. Mudanças no relato invalidam sugestões anteriores. Nunca preencher falhas de API com geração fictícia apresentada como real.
+
+### Dados e chave
+Chave OPENAI_API_KEY somente em variável de ambiente no servidor do Next.js, ignorada pelo Git, sem prefixo NEXT_PUBLIC_. O navegador chama apenas a rota autenticada da aplicação. Enviar ao provedor somente título e relato fictícios ou anonimizados, com aviso e confirmação antes da solicitação; não enviar perfil Google. Não registrar conteúdo ou credenciais nos logs. Configurar store=false sem prometer ausência total de retenção pelo provedor. Banco, histórico e dados reais de clientes ficam fora desta iteração.
+
+### Verificação
+Testar contrato, relações entre itens, autorização do endpoint, limites de chamadas, falhas, edição, revisão e exportação. Fixtures e cliente falso são testes locais, não prova do provedor real. Antes de declarar integração real validada, executar relatos completo e incompleto fictícios com custo autorizado, conferir as origens e registrar evidências sanitizadas. Alterações desta seção seguem a aprovação conjunta e o merge humano já definidos.
+
+Fontes oficiais consultadas em 28/10/2026:
+- https://developers.openai.com/api/docs/models/gpt-5.4-mini
+- https://developers.openai.com/api/docs/guides/structured-outputs?api-mode=responses
+
+### Precisões do adendo para aprovação conjunta
+Preservar origemGeracao imutável além da origem atual corrigível e editado cumulativo, conforme Specify. Mudanças de vínculo/origem invalidam revisão; critérios mantêm requisitoId válido e exclusão em cascata confirmada. Markdown existe somente no arquivo exportado, nunca como editor ou prévia.
+
+Tentativas que chegam ao adaptador contam mesmo quando falham; validações anteriores não consomem quota. Reiniciar rascunho não zera a janela; reserva atômica e liberação em finally. Tokens/timeout podem impedir a saída máxima e não autorizam repetição, aumento de teto ou gasto. Orçamento continua não definido e nenhuma escolha de provedor/modelo está aprovada.
+
+Esta preparação não coloca o adendo em vigor. Aprovação conjunta da spec e da alteração da Constitution vem antes do desenvolvimento, preservando as seções 1–6, inclusive PR específico, diffs sensíveis revisados, hooks ativos e merge humano. Publicação depende de autorização separada após revisão; não extrair credenciais do Git para APIs. Diante de 403, fornecer alternativa de publicação/revisão pela interface do GitHub.
