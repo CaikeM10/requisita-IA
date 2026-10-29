@@ -1,26 +1,36 @@
-# Tasks - Backlog da iteração
+# Tasks - IA, campos editáveis e exportação
 
-Projeto: RequisitaIA. Fontes: [Specify](specify.md) e [Plan](plan.md).
-Status inicial: todas as tarefas pendentes. Responsáveis abaixo são propostos, sujeitos ao aceite da dupla. Nenhuma implementação foi executada para este planejamento.
+Projeto: RequisitaIA. Referências: [Specify](specify.md), [Plan](plan.md), [Constitution](../CONSTITUTION.md).
+Status: todas as tarefas pendentes. Responsáveis propostos; nenhuma aprovação, implementação ou execução de teste presumida.
 
-| ID | Tarefa pequena / entrega | Spec | Dependência | Responsável proposto | Evidência de conclusão |
+| ID | Tarefa e entrega | Requisitos | Depende de | Responsável proposto | Evidência |
 | --- | --- | --- | --- | --- | --- |
-| T01 | Revisar os três documentos e registrar aprovação conjunta do recorte. | Governança | Nenhuma | João e Caike | Aceites reais no PR; não produzir aceite pelo agente. |
-| T02 | Definir tipos do documento e a execução dos testes TypeScript no ambiente existente. | RF02-RF04 | T01 | Caike | Tipos e comando de teste documentados; eventual dependência aprovada. |
-| T03 | Implementar validação de título/relato e testes de tamanho e trim. | RF02 | T02 | Caike | Testes nos limites, vazios e espaços aprovados. |
-| T04 | Implementar validação de requisitos, critérios e perguntas com testes de limites e erros por item. | RF03-RF04 | T02 | Caike | Casos válidos e inválidos de listas aprovados. |
-| T05 | Criar serializador Markdown e testes de conteúdo, acentos, caracteres estruturais e perguntas vazias. | RF06 | T02 | Caike | Texto esperado comparado ao resultado; numeração e critérios corretos. |
-| T06 | Criar /levantamento com verificação de sessão no servidor e link na área autenticada. | RF01 | T01 | João | Acesso sem sessão, com sessão e após logout verificados. |
-| T07 | Construir campos de título/relato, mensagens acessíveis e aviso de dados temporários. | RF02, RF07 | T03, T06 | João | Entradas preservadas após erro; rótulos, aviso e foco conferidos. |
-| T08 | Construir lista editável de requisitos e respectivos critérios com adicionar/remover e limites. | RF03 | T04, T07 | João | Operações e associação dos critérios ao requisito verificadas. |
-| T09 | Construir lista editável de perguntas, incluindo estado vazio e limite máximo. | RF04 | T04, T07 | João | Adicionar, editar, remover e lista vazia verificados. |
-| T10 | Integrar prévia textual e confirmação de revisão, invalidada por qualquer mudança de conteúdo. | RF05 | T05, T08, T09 | João | Todos os campos/listas invalidam confirmação; exportação permanece bloqueada quando necessário. |
-| T11 | Implementar download UTF-8 com nome fixo e liberação da URL temporária. | RF06 | T10 | João | Arquivo aberto com conteúdo igual ao revisado e acentos corretos. |
-| T12 | Executar cenários integrados, teclado, ausência de envio/armazenamento e regressão de autenticação. | RF01-RF07 | T11 | João e Caike | Registro com resultados reais e falhas; testes pendentes identificados. |
-| T13 | Atualizar instruções, executar testes e npm run check, preparar PR e submeter à revisão do outro integrante. | Pronto | T12 | Autor e revisor humano | Comandos/resultados, diff sem segredos e critérios rastreados; merge exclusivamente humano. |
+| T01 | Revisar documentos e registrar aprovação de ambos, provedor/modelo, dados enviados e orçamento. | Governança | - | Dupla | Aceites reais e orçamento; nenhuma contratação pelo agente. |
+| T02 | Configurar execução de testes e tipos do contrato/editor com fixtures fictícias. | RF04-RF05 | T01 | Caike | Comando de teste funcional e eventual dependência revisada. |
+| T03 | Escrever JSON Schema estrito das três listas e validador de integridade/limites. | RF02, RF04 | T02 | Caike | Casos válidos; IDs duplicados, vínculo órfão, enum/campo/limite inválidos rejeitados. |
+| T04 | Criar adaptador do provedor com cliente injetável, modelo fixo, timeout, saída limitada e zero retries. | RF03, RF08-RF10 | T03 | Caike | Testes sem rede contam uma chamada e cobrem recusa, truncamento e erro. |
+| T05 | Criar POST autenticado, método/origem/corpo/consentimento validados. | RF01-RF02 | T03-T04 | Caike | Pedidos bloqueados fazem zero chamadas; erros sanitizados. |
+| T06 | Adicionar controle local por usuário: concorrência e três tentativas/minuto. | RF03, RF10 | T05 | Caike | Testes de bloqueio e janela; limitação de processo único documentada. |
+| T07 | Criar rota /levantamento protegida e link da área autenticada. | RF01 | T01 | João | Acesso antes/depois de login e logout verificado. |
+| T08 | Criar título/relato com validação, aviso de envio/perda e confirmação de anonimização. | RF02, RF08 | T03, T07 | João | Erros preservam entrada; teclado, rótulos e foco conferidos. |
+| T09 | Integrar gerar/enviando/erro/sucesso, envio único e descarte de resposta tardia. | RF03, RF06, RF09-RF10 | T06, T08 | João | Cliques repetidos não duplicam envio; falha sem retry; entrada alterada invalida resultado. |
+| T10 | Construir editor de requisitos e critérios vinculados com origem e indicador de edição. | RF04-RF05 | T09 | João | Adicionar/editar/remover, limites, IDs e exclusão em cascata conferidos. |
+| T11 | Construir editor de perguntas com origem, indicador de edição e estado vazio. | RF04-RF05 | T09 | João | Limites, CRUD e origem usuario para novos itens verificados. |
+| T12 | Implementar serializador Markdown com vínculos, origens e testes. | RF07 | T03 | Caike | Conteúdo esperado, acentos, HTML inerte, numeração e lista vazia. |
+| T13 | Integrar resumo estruturado e revisão explícita invalidada por toda edição, sem prévia Markdown. | RF06-RF07 | T10-T12 | João | Todos os campos, origens e vínculos invalidam confirmação; download bloqueado quando necessário. |
+| T14 | Implementar download UTF-8 e liberação da URL temporária. | RF07 | T13 | João | Arquivo corresponde aos campos revisados; nome fixo e acentos. |
+| T15 | Executar regressões, testes de endpoint, privacidade, erros e teclado. | RF01-RF10 | T14 | Dupla | Resultados reais e pendências registrados; npm run check aprovado. |
+| T16 | Após autorização de uso, testar provedor real com relato completo e incompleto fictícios. | RF03-RF04, RF08-RF10 | T15 e custo autorizado | Dupla | Modelo, resultado, revisão de origem/hipóteses; sem simular sucesso. |
+| T17 | Atualizar execução/limitações e abrir PR para revisão humana e merge humano. | Pronto | T15-T16 | Autor e outro integrante | Diff sem segredos, evidências, revisão e aceite reais. |
 
-## Organização dos commits e PRs
-T02-T11 podem gerar commits separados com o ID da tarefa na mensagem. Agrupar somente tarefas relacionadas em um PR pequeno, indicando os RF atendidos e os que dependem de outro PR. Não marcar um requisito como pronto antes do fluxo integrado e da revisão. T01 é porta de aprovação anterior ao desenvolvimento.
+Cada tarefa técnica deve caber em commit ou PR pequeno; não agrupar toda a implementação em uma única entrega. T01 é a aprovação anterior ao desenvolvimento. T16 exige autorização adicional de gasto se ainda não registrada. Sem acesso ao provedor, é possível concluir testes com cliente falso, mas T16 continua pendente e a integração real não é declarada pronta.
 
-## Fora do backlog
-API/modelo de IA, banco e histórico, campo de telefone do laboratório, colaboração, importação, PDF/Word e implantação. Qualquer entrada dessas atividades exige uma nova spec ou mudança de escopo aprovada pela dupla.
+Fora do backlog: chat, rodadas automáticas por esclarecimento, banco/histórico, telefone do laboratório, colaboração, novos formatos e implantação pública.
+
+## Precisões propostas de rastreabilidade
+- T01: aprovação conjunta da spec e adendo das duas Constitutions antes de desenvolver. Orçamento não definido; registrar conta responsável, dados e meios de acompanhamento/bloqueio antes de uso real. Publicação depende de autorização própria e PR específico da Constitution.
+- T02-T03: schema fechado/campos obrigatórios e validação de negócio após trim; IDs globais, cardinalidade por requisito, vínculos e recusa de conteúdo insuficiente sem fabricação. Schema documental não equivale a aceitação real pelo provedor.
+- T04-T06: testar timeout, saldo/limite, chave ausente, recusa, incompleta, rede e saída inválida; zero retry e nenhuma troca de modelo. Pedidos barrados fazem zero chamadas. Testar identidade estável, reserva atômica, liberação em finally, janela móvel, falhas contadas e rascunho novo sem reset da quota. Limite local não é orçamento.
+- T10-T11: origemGeracao imutável, origem atual corrigível, novos itens usuario, editado cumulativo, edição de vínculo e exclusão em cascata confirmada; toda mudança invalida revisão.
+- T12-T14: Markdown somente ao exportar; testar fidelidade aos campos, origens e edição, escape literal de HTML/marcação e numeração dos vínculos.
+- T15-T16: distinguir fixtures de testes reais. Todos esses testes permanecem pendentes; API somente com aprovação e custo autorizado. Sem acesso/orçamento/teste real, integração real permanece pendente.
